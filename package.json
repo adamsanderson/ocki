@@ -1,0 +1,29 @@
+{
+  "name": "ocki",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "assetpack && vite --open",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@assetpack/cli": "^0.7.0",
+    "@assetpack/core": "^0.7.0",
+    "@assetpack/plugin-compress": "^0.7.0",
+    "@assetpack/plugin-json": "^0.7.0",
+    "@assetpack/plugin-manifest": "^0.7.0",
+    "@assetpack/plugin-mipmap": "^0.7.0",
+    "@assetpack/plugin-texture-packer": "^0.7.0",
+    "@assetpack/plugin-webfont": "^0.7.0",
+    "@types/animejs": "^3.1.10",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5"
+  },
+  "dependencies": {
+    "@pixi/ui": "^0.10.0",
+    "animejs": "^3.2.1",
+    "pixi.js": "^7.3.1"
+  }
+}
