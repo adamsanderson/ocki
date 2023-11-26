@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "assetpack && vite --open",
+    "dev": "assetpack && vite --open --host",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
