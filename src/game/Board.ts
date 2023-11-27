@@ -1,6 +1,7 @@
-import { Container } from "pixi.js";
+import { Container, FederatedPointerEvent } from "pixi.js";
 import { Piece } from "./Piece";
 import anime from "animejs";
+import { StarBurst } from "./StarBurst";
 
 type MaybePiece = Piece | null;
 type GameColumn = MaybePiece[];
@@ -36,7 +37,7 @@ export class GameBoard extends Container {
 
   listenToPiece(piece: Piece) {
     piece.on('pointerover', () => this.hoverPiece(piece));
-    piece.on('pointerup', () => this.clickPiece(piece));
+    piece.on('pointerup', (event) => this.clickPiece(event, piece));
   }
 
   hoverPiece(piece: Piece) {
@@ -49,13 +50,18 @@ export class GameBoard extends Container {
     }
   }
 
-  async clickPiece(piece: Piece) {
+  async clickPiece(event: FederatedPointerEvent, piece: Piece) {
     this.hoverPiece(piece);
     if (this.hoveredPieces.size > 1) {
       this.hoveredPieces.forEach(p => this.removePiece(p));
       this.removeChild(...this.hoveredPieces);
 
       this.emit('removePieces', {count: this.hoveredPieces.size})
+
+      const starBurst = new StarBurst(this.hoveredPieces.size * 2);
+      starBurst.x = event.x - this.x;
+      starBurst.y = event.y - this.y;
+      this.addChild(starBurst);
 
       this.eventMode = 'none';
       await this.dropPieces();
