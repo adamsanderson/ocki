@@ -55,6 +55,8 @@ export class GameBoard extends Container {
       this.hoveredPieces.forEach(p => this.removePiece(p));
       this.removeChild(...this.hoveredPieces);
 
+      this.emit('removePieces', {count: this.hoveredPieces.size})
+
       this.eventMode = 'none';
       await this.dropPieces();
       await this.shiftPieces();
