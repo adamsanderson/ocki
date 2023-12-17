@@ -11,8 +11,8 @@ export class ScoreCounter extends Container {
         super();
         this.label = new Text(this.score.toString(), {
             fill: color.dark,
-            fontFamily: font.ui,
-            fontSize: fontSize.medium,
+            fontFamily: font.flavor,
+            fontSize: fontSize.large,
             align: "center",
         });
         this.label.pivot.x = this.label.width / 2;
