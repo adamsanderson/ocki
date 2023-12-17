@@ -5,6 +5,7 @@ export const font = {
 
 export const fontSize = {
   medium: 24,
+  mediumLarge: 32,
   large: 48,
 }
 

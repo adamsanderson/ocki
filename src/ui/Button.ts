@@ -31,8 +31,8 @@ export class Button extends FancyButton {
 
     const text = new Text(opts.text, {
       fill: 0x73B1BF,
-      fontFamily: font.ui,
-      fontSize: fontSize.medium,
+      fontFamily: font.flavor,
+      fontSize: fontSize.mediumLarge,
       align: 'center',
     });
 

@@ -13,7 +13,7 @@ export class ScoreCounter extends Container {
             fill: color.dark,
             fontFamily: font.flavor,
             fontSize: fontSize.large,
-            align: "center",
+            align: "right",
         });
         this.label.pivot.x = this.label.width / 2;
         this.label.pivot.y = this.label.height / 2;

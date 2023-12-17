@@ -23,7 +23,7 @@ export class GameScreen extends Container {
 
   /** Resize the screen, fired whenever window size changes  */
   public resize(width: number, height: number) {
-    this.scoreCounter.x = 20;
+    this.scoreCounter.x = width - 20 - this.scoreCounter.width;
     this.scoreCounter.y = 30;
     this.gameBoard.x = width/2 - this.gameBoard.width/2;
     this.gameBoard.y = height/2 - this.gameBoard.height/2;
