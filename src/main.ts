@@ -18,8 +18,8 @@ export const app = new Application<HTMLCanvasElement>({
 function resize() {
   const windowWidth = window.innerWidth;
   const windowHeight = window.innerHeight;
-  const minWidth = 375;
-  const minHeight = 700;
+  const minWidth = 540;
+  const minHeight = 620;
 
   // Calculate renderer and canvas sizes based on current dimensions
   const scaleX = windowWidth < minWidth ? minWidth / windowWidth : 1;
@@ -35,8 +35,6 @@ function resize() {
 
   // Update renderer and navigation screens dimensions
   app.renderer.resize(width, height);
-
-  // TODO:
   navigation.resize(width, height);
 }
 
@@ -44,10 +42,10 @@ function resize() {
 function visibilityChange() {
   if (document.hidden) {
     // sound.pauseAll();
-    // navigation.blur();
+    navigation.blur();
   } else {
     // sound.resumeAll();
-    // navigation.focus();
+    navigation.focus();
   }
 }
 
