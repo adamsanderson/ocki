@@ -1,5 +1,5 @@
 import anime from "animejs";
-import { Container, Rectangle, Sprite } from "pixi.js";
+import { Container, Sprite } from "pixi.js";
 
 export class BackButton extends Container {
   private icon: Sprite;
@@ -10,8 +10,7 @@ export class BackButton extends Container {
     this.icon.pivot.x = 0;
     this.icon.pivot.y = this.icon.height / 2;
     this.addChild(this.icon);
-    this.eventMode = 'static';
-    this.hitArea = new Rectangle(0, 0, this.width, this.height);
+    this.eventMode = 'static';    
     
     this.onpointerover = () => {
       anime({

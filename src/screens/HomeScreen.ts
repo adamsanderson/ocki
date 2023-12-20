@@ -22,7 +22,7 @@ export class HomeScreen extends Container {
     this.logo = new Logo();
     this.addChild(this.logo);
 
-    this.playButton.onclick = (ev) => {
+    this.playButton.onpointertap = () => {
       navigation.showScreen(GameScreen)
     }
   }

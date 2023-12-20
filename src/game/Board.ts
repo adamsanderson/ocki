@@ -67,7 +67,41 @@ export class GameBoard extends Container {
       await this.dropPieces();
       await this.shiftPieces();
       this.eventMode = 'auto';
+      if (!this.hasValidMoves()) {
+        this.emit('gameOver');
+      }
     }
+  }
+
+  hasValidMoves() {
+    for (let i = 0; i < this.colCount; i++) {
+      for (let j = 0; j < this.rowCount; j++) {
+        const piece = this.getPiece(i,j);
+        if (piece && this.hasConnectedPiece(piece)) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+
+  hasConnectedPiece(piece: Piece): boolean {
+    const type = piece.type;
+    if (this.getPiece(piece.i - 1, piece.j)?.type === type) {
+      return true;
+    }
+    if (this.getPiece(piece.i + 1, piece.j)?.type === type) {
+      return true;
+    }
+    if (this.getPiece(piece.i, piece.j - 1)?.type === type) {
+      return true;
+    }
+    if (this.getPiece(piece.i, piece.j + 1)?.type === type) {
+      return true;
+    }
+
+    return false;
   }
 
   getConnected(piece: Piece) {
