@@ -10,11 +10,6 @@
   -webkit-text-size-adjust: 100%;
 }
 
-@font-face {
-  font-family: 'LilitaOne';
-  src: url('fonts/LilitiaOne/LilitaOne-Regular.ttf')  format('truetype');
-}
-
 html, body {
   margin: 0;
   padding: 0;

@@ -1,6 +1,6 @@
 export const font = {
   ui: 'Verdana',
-  flavor: 'LilitaOne',
+  flavor: 'LilitaOne Regular',
 }
 
 export const fontSize = {
