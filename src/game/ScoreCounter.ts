@@ -4,12 +4,12 @@ import anime from "animejs";
 
 export class ScoreCounter extends Container {
     BONUS_FACTOR = 1.4;
-    private score = 0;
+    private _score = 0;
     private label: Text;
 
     constructor() {
         super();
-        this.label = new Text(this.score.toString(), {
+        this.label = new Text(this._score.toString(), {
             fill: color.dark,
             fontFamily: font.flavor,
             fontSize: fontSize.large,
@@ -20,9 +20,13 @@ export class ScoreCounter extends Container {
         this.addChild(this.label);
     }
 
+    get score() {
+        return this._score;
+    }
+
     removedPieces(count: number) {
-        this.score = Math.floor(this.score + count ** this.BONUS_FACTOR);
-        this.label.text = this.score.toString();
+        this._score = Math.floor(this._score + count ** this.BONUS_FACTOR);
+        this.label.text = this._score.toString();
         anime({
             targets: this.label.scale,
             keyframes: [

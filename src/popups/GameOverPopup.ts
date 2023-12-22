@@ -16,9 +16,12 @@ export class GameOverPopup extends Container {
   private backdrop: Sprite;
   private replayButton: Button;
   private homeButton: Button;
+  private scoreLabel: Text;
+  private _score: number;
 
-  constructor() {
+  constructor(score: number) {
     super();
+    this._score = score;
 
     this.backdrop = this.addChild(Sprite.from(Texture.WHITE));
     this.backdrop.alpha = 0;
@@ -32,6 +35,15 @@ export class GameOverPopup extends Container {
     }));
     this.message.anchor.set(0.5);
     this.message.pivot.set(0.5, 1);
+
+    this.scoreLabel = this.addChild(new Text("", {
+      fill: color.dark,
+      fontFamily: font.flavor,
+      fontSize: fontSize.large,
+      align: 'center',
+    }))
+    this.scoreLabel.anchor.set(0.5, 1);
+    this.scoreLabel.pivot.set(0.5, 1);
 
     this.replayButton = this.addChild(new Button({ text: "New Game" }));
     this.replayButton.onpointertap = async () => {
@@ -51,7 +63,10 @@ export class GameOverPopup extends Container {
     const centerX = width * 0.5
     this.message.x = centerX;
     this.message.y = height * 0.45 - this.message.height / 2;
-    
+
+    this.scoreLabel.x = centerX;
+    this.scoreLabel.y = this.message.y - 20;
+
     this.replayButton.x = centerX;
     this.replayButton.y = this.message.y + this.message.height + 20;
 
@@ -72,11 +87,19 @@ export class GameOverPopup extends Container {
 
     const showMessage = anime({
       targets: [this.message.scale],
-      x: [0,1],
-      y: [0,1],
+      x: [0, 1],
+      y: [0, 1],
       duration: 500,
     }).finished
 
-    await Promise.allSettled([showBackdrop, showMessage]);
+    const showScore = anime({
+      targets: [this.scoreLabel],
+      text: [0, this._score],
+      duration: this._score * 60,
+      round: 1,
+      easing: 'easeOutQuad'
+    }).finished
+
+    await Promise.allSettled([showBackdrop, showMessage, showScore]);
   }
 }

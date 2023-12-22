@@ -25,7 +25,7 @@ export class GameScreen extends Container {
     this.backButton.height /= 2;
     this.backButton.on('pointerup', (ev) => {
       if (ev.shiftKey) {
-        navigation.presentPopup(GameOverPopup)
+        navigation.presentPopup(GameOverPopup, this.scoreCounter.score)
       } else {
         navigation.showScreen(HomeScreen)
       }
@@ -35,7 +35,7 @@ export class GameScreen extends Container {
 
     this.gameBoard = new GameBoard();
     this.gameBoard.on('removePieces', (ev) => this.scoreCounter.removedPieces(ev.count))
-    this.gameBoard.on('gameOver', () => navigation.presentPopup(GameOverPopup))
+    this.gameBoard.on('gameOver', () => navigation.presentPopup(GameOverPopup, this.scoreCounter.score))
     this.addChild(this.gameBoard);
 
   }

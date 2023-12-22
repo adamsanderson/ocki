@@ -1,7 +1,6 @@
 import { Container } from 'pixi.js';
 import { areBundlesLoaded, loadBundles } from './assets';
 import { app } from '../main';
-import { pool } from './pool';
 
 /** Interface for app screens */
 interface AppScreen extends Container {
@@ -29,7 +28,7 @@ interface AppScreen extends Container {
 
 /** Interface for app screens constructors */
 interface AppScreenConstructor {
-    new (): AppScreen;
+    new (...params: any[]): AppScreen;
     /** List of assets bundles required by the screen */
     assetBundles?: string[];
 }
@@ -54,8 +53,8 @@ class Navigation {
     public currentPopup?: AppScreen;
 
     /** Set the  default load screen */
-    public setBackground(ctor: AppScreenConstructor) {
-        this.background = new ctor();
+    public setBackground<T extends AppScreenConstructor>(ctor: T, ...params: ConstructorParameters<T>) {
+        this.background = new ctor(...params);
         this.addAndShowScreen(this.background);
     }
 
@@ -123,7 +122,7 @@ class Navigation {
      * Hide current screen (if there is one) and present a new screen.
      * Any class that matches AppScreen interface can be used here.
      */
-    public async showScreen(ctor: AppScreenConstructor) {
+    public async showScreen<T extends AppScreenConstructor>(ctor: T, ...params: ConstructorParameters<T>){
         // Block interactivity in current screen
         if (this.currentScreen) {
             this.currentScreen.interactiveChildren = false;
@@ -141,7 +140,7 @@ class Navigation {
         }
 
         // Create the new screen and add that to the stage
-        this.currentScreen = pool.get(ctor);
+        this.currentScreen = new ctor(...params);
         await this.addAndShowScreen(this.currentScreen);
     }
 
@@ -161,7 +160,7 @@ class Navigation {
     /**
      * Show up a popup over current screen
      */
-    public async presentPopup(ctor: AppScreenConstructor) {
+    public async presentPopup<T extends AppScreenConstructor>(ctor: T, ...params: ConstructorParameters<T>) {
         if (this.currentScreen) {
             this.currentScreen.interactiveChildren = false;
             await this.currentScreen.pause?.();
@@ -171,7 +170,7 @@ class Navigation {
             await this.hideAndRemoveScreen(this.currentPopup);
         }
 
-        this.currentPopup = new ctor();
+        this.currentPopup = new ctor(...params);
         await this.addAndShowScreen(this.currentPopup);
     }
 
