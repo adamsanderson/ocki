@@ -4,6 +4,7 @@ import { Button } from "../ui/Button";
 import { navigation } from "../utils/navigation";
 import { GameScreen } from "./GameScreen";
 import anime from "animejs";
+import { AboutScreen } from "./AboutScreen";
 
 /** The first screen that shows up after loading */
 export class HomeScreen extends Container {
@@ -17,14 +18,17 @@ export class HomeScreen extends Container {
     super();
 
     this.playButton = this.addChild(new Button({ text: "Play" }));
-    this.aboutButton = this.addChild(new Button({ text: "About" }));
-
-    this.logo = new Logo();
-    this.addChild(this.logo);
-
     this.playButton.onpointertap = () => {
       navigation.showScreen(GameScreen)
     }
+
+    this.aboutButton = this.addChild(new Button({ text: "About" }));
+    this.aboutButton.onpointertap = () => {
+      navigation.showScreen(AboutScreen)
+    }
+
+    this.logo = new Logo();
+    this.addChild(this.logo);
   }
 
   /** Resize the screen, fired whenever window size changes  */

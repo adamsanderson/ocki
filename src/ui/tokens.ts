@@ -12,4 +12,5 @@ export const fontSize = {
 export const color = {
   dark: 0x5c5c5c,
   light: 0xaaaaaa,
+  purple: 0x7573BF,
 }
