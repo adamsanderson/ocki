@@ -61,7 +61,7 @@ export class AboutScreen extends Container {
   }
 
   /** Resize the screen, fired whenever window size changes  */
-  public resize(width: number, height: number) {
+  public resize(width: number) {
 
     const centerX = width * 0.5
     
