@@ -7,11 +7,11 @@ import { HomeScreen } from "./HomeScreen";
 const HOW_TO_PLAY = `
   Tap on any adjacent blocks of the same type to make them all disappear.
   Clear larger sets for more points. That's it.
-`.replace(/\n/g, " ").trim()
+`.replace(/\s+/mg, " ").trim()
 
 const ABOUT = `
   This is one of many versions of this game.  This particular one was built for my mother
-  since I don't know how long the last version I made will keep running. 
+  since I don't know how long the last version I made will run as we leap into the future. 
 `.replace(/\s+/mg, " ").trim()
 
 /** The first screen that shows up after loading */
